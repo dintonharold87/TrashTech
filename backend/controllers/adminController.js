@@ -1,6 +1,8 @@
 const { Admin } = require("../models/adminModel");
 const { Driver } = require("../models/registerDriverModel");
 const { GarbageTruck } = require("../models/truckModel");
+const {GarbageRequest}= require("../models/garbageRequestModel");
+const {ClientResponse} = require("../models/clientResponseModel");
 const bcrypt = require("bcrypt");
 
 // Register admin
@@ -120,6 +122,53 @@ exports.getAllTrucks = async (req, res) => {
   try {
     const trucks = await GarbageTruck.find();
     res.json(trucks);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// View garbage requests from the client(/customer requests)
+exports.getDashboard = async (req, res) => {
+  try {
+    const garbageRequests = await GarbageRequest.find();
+    // res.render("user-dashboard", { garbageRequests });
+    res.json(garbageRequests);
+  } catch (err) {
+    console.error(err);
+    res.render("error", {
+      message: "An error occurred while fetching the garbage requests.",
+    });
+  }
+};
+
+// Respond to client request (/message)
+exports.respondToRequest = async (req, res) => {
+  const requestId = req.params.id;
+  const { driver,date, truckLicenseNumber,driverContact,orderStatus } = req.body;
+
+
+  try {
+    // Find the request
+    const request = await GarbageRequest.findById(requestId);
+    if (!request) {
+      return res.status(404).json({ message: "Request not found" });
+    }
+
+  
+    // Create a new response object
+    const response = new ClientResponse({
+      driver,
+      date,
+      truckLicenseNumber,
+      driverContact,
+      orderStatus,
+    });
+
+    // Save the response
+    await response.save();
+
+    // Send the response back to the client
+    return res.json({ message: "Response sent successfully", response });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
