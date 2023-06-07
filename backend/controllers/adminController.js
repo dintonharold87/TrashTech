@@ -2,7 +2,7 @@ const { Admin } = require("../models/adminModel");
 const { Driver } = require("../models/registerDriverModel");
 const { GarbageTruck } = require("../models/truckModel");
 const {GarbageRequest}= require("../models/garbageRequestModel");
-const {ClientResponse} = require("../models/clientResponseModel");
+const {ClientResponse} = require("../models/responseToClientModel");
 const bcrypt = require("bcrypt");
 
 // Register admin
