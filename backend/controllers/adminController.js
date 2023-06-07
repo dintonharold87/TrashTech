@@ -86,3 +86,41 @@ exports.getAllDrivers = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Create a new truck
+exports.createTruck = async (req, res) => {
+  try {
+    const { truckNumber, licensePlate } = req.body;
+    const truck = new GarbageTruck({ truckNumber, licensePlate });
+    await truck.save();
+    res.status(201).json({ message: 'Truck created successfully', truck });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to create truck' });
+  }
+};
+
+// Delete a truck
+exports.deleteTruck = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedTruck = await GarbageTruck.findByIdAndRemove(id);
+    if (!deletedTruck) {
+      return res.status(404).json({ message: 'Truck not found' });
+    }
+    res.json({ message: 'Truck deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to delete truck' });
+  }
+};
+
+// Get all trucks
+exports.getAllTrucks = async (req, res) => {
+  try {
+    const trucks = await GarbageTruck.find();
+    res.json(trucks);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
