@@ -2,8 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const path = require("path");
-
 
 const app = express();
 dotenv.config();
@@ -26,6 +24,11 @@ mongoose
   .catch((error) => {
     console.error("Error connecting to database", error);
   });
+
+
+// Middleware
+app.use(cors());
+app.use(express.json());
 
   app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
