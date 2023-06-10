@@ -6,17 +6,20 @@ const {
   ensureAdmin,
 } = require("../middleware/authMiddleware");
 
-
 // Register a new admin
-router.post("/", adminController.createAdmin);
+router.post("/admins", adminController.createAdmin);
 
 // Register driver
-router.post('/register-driver', ensureAuthenticated, ensureAdmin, adminController.createDriver);
-module.exports = router;
+router.post(
+  "/drivers",
+  ensureAuthenticated,
+  ensureAdmin,
+  adminController.createDriver
+);
 
 // Delete driver by ID
 router.delete(
-  "/registered-driver/:id",
+  "/drivers/:id",
   ensureAuthenticated,
   ensureAdmin,
   adminController.deleteDriver
@@ -24,11 +27,68 @@ router.delete(
 
 // Update driver data
 router.put(
-  "/registered-driver/:id",
+  "/drivers/:id",
   ensureAuthenticated,
   ensureAdmin,
   adminController.updateDriver
 );
 
+// Get all drivers
+router.get(
+  "/drivers",
+  ensureAuthenticated,
+  ensureAdmin,
+  adminController.getAllDrivers
+);
+
+// Get a specific Driver details
+router.get(
+  "/drivers/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  adminController.getDriverById
+);
+
 // Register garbage truck
-router.post('/register-garbage-truck', ensureAuthenticated, ensureAdmin, adminController.createTruck);
+router.post(
+  "/garbage-trucks",
+  ensureAuthenticated,
+  ensureAdmin,
+  adminController.createTruck
+);
+
+// View all trucks
+router.get(
+  "/garbage-trucks",
+  ensureAuthenticated,
+  ensureAdmin,
+  adminController.getAllTrucks
+);
+// view details of a specific truck
+router.get(
+  "/garbage-trucks/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  adminController.getGarbageTruckById
+);
+
+// delete a truck
+router.delete(
+  "/garbage-trucks/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  adminController.deleteTruck
+);
+
+// View garbage requests from clients
+router.get('/client-requests', ensureAuthenticated, adminController.getClientRequests);
+
+// Respond to a request
+router.post(
+  "/client-requests/:requestId/respond",
+  ensureAuthenticated,
+  adminController.respondToRequest
+);
+
+
+module.exports = router;

@@ -89,6 +89,19 @@ exports.getAllDrivers = async (req, res) => {
   }
 };
 
+// Get driver by ID
+exports.getDriverById = async (req, res) => {
+  try {
+    const driver = await Driver.findById(req.params.id);
+    if (!driver) {
+      return res.status(404).json({ message: 'Driver not found' });
+    }
+    res.json(driver);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 // Create a new truck
 exports.createTruck = async (req, res) => {
   try {
@@ -127,8 +140,21 @@ exports.getAllTrucks = async (req, res) => {
   }
 };
 
+// Get garbage truck by ID
+exports.getGarbageTruckById = async (req, res) => {
+  try {
+    const garbageTruck = await GarbageTruck.findById(req.params.id);
+    if (!garbageTruck) {
+      return res.status(404).json({ message: 'Garbage truck not found' });
+    }
+    res.json(garbageTruck);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 // View garbage requests from the client(/customer requests)
-exports.getDashboard = async (req, res) => {
+exports.getClientRequests = async (req, res) => {
   try {
     const garbageRequests = await GarbageRequest.find();
     // res.render("user-dashboard", { garbageRequests });

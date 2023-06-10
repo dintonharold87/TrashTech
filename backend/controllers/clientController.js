@@ -1,5 +1,6 @@
 const { Client } = require("../models/clientModel");
 const { GarbageRequest } = require("../models/garbageRequestModel");
+const {ClientResponse}= require("../models/responseToClientModel");
 const bcrypt = require("bcrypt");
 
 // Register client
@@ -31,10 +32,10 @@ exports.createClient = async (req, res) => {
 
 // Create garbage request
 exports.submitGarbageRequest = async (req, res) => {
-  
   try {
     const { name, contact, location, requestedDate, requestedTime } = req.body;
     const garbageRequests = new GarbageRequest({
+      client,
       name,
       contact,
       location,
@@ -42,11 +43,33 @@ exports.submitGarbageRequest = async (req, res) => {
       requestedTime,
     });
     await garbageRequests.save();
-    res.status(201).json({ message: "Request created successfully", garbageRequests });
+    res
+      .status(201)
+      .json({ message: "Request created successfully", garbageRequests });
   } catch (err) {
     console.error(err);
     res.render("error", {
       message: "An error occurred while creating the garbage request.",
     });
+  }
+};
+
+// Controller to get the response from admin to a client's request
+exports.getClientResponse = async (req, res) => {
+  try {
+    const clientId = req.params.clientId;
+    
+    // Find the response for the client's request
+    const response = await ClientResponse.findOne({ client: clientId });
+    
+    if (!response) {
+      return res.status(404).json({ message: 'Response not found' });
+    }
+    
+    // Return the response to the client
+    return res.status(200).json(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server Error' });
   }
 };

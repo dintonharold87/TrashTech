@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const garbageRequestSchema = new mongoose.Schema({
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Client",
+    required: true,
+  },
   name: {
     type: String,
     required: true,

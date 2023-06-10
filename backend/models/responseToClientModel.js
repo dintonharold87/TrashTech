@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const responseToClientSchema = new mongoose.Schema({
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Client",
+    required: true,
+  },
   driver: {
     type: String,
     required: true,
