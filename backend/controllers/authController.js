@@ -1,38 +1,48 @@
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const Admin = require("../models/adminModel");
-const Client = require("../models/clientModel");
+const { Admin } = require("../models/adminModel");
+const { Client } = require("../models/clientModel");
 
 // Handle user login
 exports.login = (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
+  passport.authenticate("local", async (err, { user }, info) => {
     if (err) {
       return next(err);
     }
     if (!user) {
-      return res.render("login", { error: info.message });
+      return res.status(400).json({ error: info.message });
     }
-    bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+    bcrypt.compare(req.body.password, user.password, async (err, isMatch) => {
       if (err) {
         return next(err);
       }
       if (!isMatch) {
-        return res.render("login", { error: "Invalid email or password" });
+        return res.status(400).json({ error: "Invalid email or password" });
       }
+
+      const { role } = req.body;
+      if (!role) {
+        return res.status(400).json({ error: "Role is required" });
+      }
+
+      let isValidRole = false;
+      if (role === "admin" && user instanceof Admin) {
+        isValidRole = true;
+      } else if (role === "client" && user instanceof Client) {
+        isValidRole = true;
+      }
+
+      if (!isValidRole) {
+        return res.status(400).json({ error: "Invalid role for this user" });
+      }
+
       req.logIn(user, (err) => {
         if (err) {
           return next(err);
         }
-        if (user instanceof Admin) {
-          //   return res.redirect("/admin/dashboard");
-          // Redirect to a protected route or send a success response
-          return res.json({ message: "Logged in successfully" });
-        }
-        if (user instanceof Client) {
-          //   return res.redirect("/client/profile");
-          // Redirect to a protected route or send a success response
-          return res.json({ message: "Logged in successfully" });
-        }
+        return res
+          .status(200)
+          .json({ message: `${role} logged in successfully` });
       });
     });
   })(req, res, next);
