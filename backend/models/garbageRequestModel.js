@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const { Client } = require("./clientModel");
 
 const garbageRequestSchema = new mongoose.Schema({
-  client: {
+  clientId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client",
     required: true,
@@ -13,11 +14,11 @@ const garbageRequestSchema = new mongoose.Schema({
   contact: { type: String, required: true },
   location: { type: String, required: true },
   requestedDate: {
-    type: Date,
+    type: String,
     required: true,
   },
   requestedTime: {
-    type: Date,
+    type: String,
     required: true,
   },
 });

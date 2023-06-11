@@ -34,8 +34,9 @@ exports.createClient = async (req, res) => {
 exports.submitGarbageRequest = async (req, res) => {
   try {
     const { name, contact, location, requestedDate, requestedTime } = req.body;
+    const clientId = req.user._id;
     const garbageRequests = new GarbageRequest({
-      client,
+      clientId,
       name,
       contact,
       location,
@@ -57,10 +58,11 @@ exports.submitGarbageRequest = async (req, res) => {
 // Controller to get the response from admin to a client's request
 exports.getClientResponse = async (req, res) => {
   try {
-    const clientId = req.params.clientId;
+    const { requestId } = req.params;
+    const { clientId } = req.user;
     
     // Find the response for the client's request
-    const response = await ClientResponse.findOne({ client: clientId });
+    const response = await ClientResponse.findOne({ requestId, clientId });
     
     if (!response) {
       return res.status(404).json({ message: 'Response not found' });

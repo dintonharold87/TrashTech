@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const responseToClientSchema = new mongoose.Schema({
-  client: {
+  requestId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client",
+    ref: "GarbageRequest",
     required: true,
   },
   driver: {
@@ -11,7 +11,7 @@ const responseToClientSchema = new mongoose.Schema({
     required: true,
   },
   date: {
-    type: Date,
+    type: String,
     required: true,
   },
   truckLicenseNumber: {

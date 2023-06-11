@@ -169,33 +169,31 @@ exports.getClientRequests = async (req, res) => {
 
 // Respond to client request (/message)
 exports.respondToRequest = async (req, res) => {
-  const requestId = req.params.id;
+const {requestId} = req.params;
   const { driver,date, truckLicenseNumber,driverContact,orderStatus } = req.body;
 
 
-  try {
-    // Find the request
-    const request = await GarbageRequest.findById(requestId);
-    if (!request) {
-      return res.status(404).json({ message: "Request not found" });
-    }
-
   
-    // Create a new response object
-    const response = new ClientResponse({
-      driver,
-      date,
-      truckLicenseNumber,
-      driverContact,
-      orderStatus,
-    });
+try{
+  // Create a new response object
+  const response = new ClientResponse({
+    requestId,
+    driver,
+    date,
+    truckLicenseNumber,
+    driverContact,
+    orderStatus,
+  });
 
-    // Save the response
-    await response.save();
+  // Save the response
+  await response.save();
 
-    // Send the response back to the client
-    return res.json({ message: "Response sent successfully", response });
-  } catch (error) {
+  // Send the response back to the client
+  return res.json({ message: "Response sent successfully", response });
+}
+  
+    
+   catch (error) {
     res.status(500).json({ message: error.message });
   }
 };

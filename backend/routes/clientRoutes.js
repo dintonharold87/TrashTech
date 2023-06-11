@@ -10,7 +10,8 @@ router.post("/clients", clientController.createClient);
 router.post('/submit-garbage-request', ensureAuthenticated, ensureClient, clientController.submitGarbageRequest);
 
 // View response to request
-router.get("/requests/:requestId/response", clientController.getClientResponse);
+router.get("/requests/:requestId/response",
+ensureAuthenticated, ensureClient, clientController.getClientResponse);
 
 
 module.exports = router;
