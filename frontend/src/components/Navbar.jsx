@@ -85,10 +85,10 @@ const Navbar = () => {
             <div className="mt-4 space-y-2 lg:hidden md:inline-block">
               <Link
                 to="/login"
-                className="inline-block w-max px-4 py-2 mr-4 text-center text-beigeLight text-sm bg-greenDark rounded-lg shadow font-semibold"
+                className="inline-block w-max px-4 py-2 mr-4 text-center text-beigeLight text-sm bg-greenDark rounded-lg shadow font-semibold font-sans"
                 onClick={() => setNavbar(!navbar)}
               >
-                Schedule pick up
+                Schedule pickup
               </Link>
             </div>
           </div>
@@ -96,10 +96,10 @@ const Navbar = () => {
         <div className="hidden space-x-6 lg:inline-block">
           <Link
             to="/login"
-            className="px-4 py-2 text-beigeLight text-sm bg-greenDark rounded-lg shadow  hover:text-greenLight font-semibold font-body"
+            className="px-4 py-2 text-beigeLight text-sm bg-greenDark rounded-lg shadow  hover:text-greenLight font-semibold font-sans"
             onClick={() => setNavbar(!navbar)}
           >
-            Schedule pick up
+            Schedule pickup
           </Link>
         </div>
       </div>
