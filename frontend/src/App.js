@@ -1,10 +1,11 @@
 
 import './App.css';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    
-      <h1>TrashTech</h1>
+    <> <Navbar/></>
+     
     
   );
 }
