@@ -1,19 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
+  
+ 
+
+  // Determine if the current page is the landing page
+  const isLandingPage = window.location.pathname === "/";
   return (
     <nav className="w-full bg-beigeLight shadow fixed top-0 left-0 right-0 z-50 border-b border-greenLight">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <Link to="/">
+            <RouterLink to="/">
               <div className="flex items-center">
                 <img src={logo} alt="Logo" />
               </div>
-            </Link>
+            </RouterLink>
             <div className="md:hidden">
               <button
                 className="p-2 text-greenDark rounded-md outline-none focus:border-greenDark focus:border"
@@ -59,48 +66,100 @@ const Navbar = () => {
             }`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li className="text-greenDark font-medium text-base font-sans capitalize hover:text-greenLight">
-                <Link to="/" onClick={() => setNavbar(!navbar)}>
-                  Home
-                </Link>
-              </li>
-              <li className="text-greenDark font-medium text-base capitalize font-sans hover:text-greenLight">
-                <Link to="/about" onClick={() => setNavbar(!navbar)}>
-                  About Us
-                </Link>
-              </li>
-              <li className="text-greenDark font-medium text-base capitalize font-sans hover:text-greenLight">
-                <Link to="/faqs" onClick={() => setNavbar(!navbar)}>
-                  Faqs
-                </Link>
-              </li>
+              {isLandingPage ? (
+                <>
+                  {" "}
+                  <li className="text-greenDark font-medium text-base font-sans capitalize hover:text-greenLight">
+                    <RouterLink to="/" onClick={() => setNavbar(!navbar)}>
+                      Home
+                    </RouterLink>
+                  </li>
+                  <li className="text-greenDark font-medium text-base capitalize font-sans hover:text-greenLight">
+                    <ScrollLink
+                      to="about"
+                      smooth={true}
+                      offset={-50}
+                      duration={500}
+                      className="cursor-pointer"
+                      onClick={() => setNavbar(!navbar)}
+                    >
+                      About Us
+                    </ScrollLink>
+                  </li>
+                  <li className="text-greenDark font-medium text-base capitalize font-sans hover:text-greenLight">
+                    <ScrollLink
+                      to="faqs"
+                      smooth={true}
+                      offset={-50}
+                      duration={500}
+                      className="cursor-pointer"
+                      onClick={() => setNavbar(!navbar)}
+                    >
+                      Faqs
+                    </ScrollLink>
+                  </li>
+                  <li className="text-greenDark font-medium text-base capitalize font-sans hover:text-greenLight">
+                    <ScrollLink
+                      to="contact"
+                      smooth={true}
+                      offset={-50}
+                      duration={500}
+                      className="cursor-pointer"
+                      onClick={() => setNavbar(!navbar)}
+                    >
+                      Contact us
+                    </ScrollLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="text-greenDark font-medium text-base font-sans capitalize hover:text-greenLight">
+                    <RouterLink to="/#hero" onClick={() => setNavbar(!navbar)}>
+                      Home
+                    </RouterLink>
+                  </li>
+                  <li className="text-greenDark font-medium text-base capitalize font-sans hover:text-greenLight">
+                    <RouterLink to="/#about" onClick={() => setNavbar(!navbar)}>
+                      About Us
+                    </RouterLink>
+                  </li>
+                  <li className="text-greenDark font-medium text-base capitalize font-sans hover:text-greenLight">
+                    <RouterLink to="/#faqs" onClick={() => setNavbar(!navbar)}>
+                      Faqs
+                    </RouterLink>
+                  </li>
 
-              <li className="text-greenDark font-medium text-base capitalize font-sans hover:text-greenLight">
-                <Link to="/contact" onClick={() => setNavbar(!navbar)}>
-                  Contact us
-                </Link>
-              </li>
+                  <li className="text-greenDark font-medium text-base capitalize font-sans hover:text-greenLight">
+                    <RouterLink
+                      to="/#contact"
+                      onClick={() => setNavbar(!navbar)}
+                    >
+                      Contact us
+                    </RouterLink>
+                  </li>
+                </>
+              )}
             </ul>
 
             <div className="mt-4 space-y-2 lg:hidden md:inline-block">
-              <Link
+              <RouterLink
                 to="/login"
                 className="inline-block w-max px-4 py-2 mr-4 text-center text-beigeLight text-sm bg-greenDark rounded-lg shadow font-semibold font-sans"
                 onClick={() => setNavbar(!navbar)}
               >
                 Schedule pickup
-              </Link>
+              </RouterLink>
             </div>
           </div>
         </div>
         <div className="hidden space-x-6 lg:inline-block">
-          <Link
+          <RouterLink
             to="/login"
             className="px-4 py-2 text-beigeLight text-sm bg-greenDark rounded-lg shadow  hover:text-greenLight font-semibold font-sans"
             onClick={() => setNavbar(!navbar)}
           >
             Schedule pickup
-          </Link>
+          </RouterLink>
         </div>
       </div>
     </nav>

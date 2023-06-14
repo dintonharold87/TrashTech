@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section id="hero" className="bg-secondary-100 mt-4">
+    <section id="heroSection" className="bg-secondary-100 mt-4">
       <div className="container flex flex-col md:flex-row items-center px-6 mx-auto p-10 space-y-0 md:space-y-0 ">
         {/* left section */}
         <div className="flex flex-col mb-8 space-y-4 md:space-y-8 md:w-1/2 mt-16">
