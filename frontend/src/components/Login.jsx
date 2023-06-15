@@ -182,7 +182,7 @@ const Login = () => {
           <Grid item xs={5}>
             <Link
               to="/admin_registration"
-              className="text-blue-500 hover:text-blue-700 underline text-xs sm:text-sm"
+              className="text-greenDark hover:text-greenDarker underline text-xs sm:text-sm"
             >
               Sign up as an admin
             </Link>
@@ -190,7 +190,7 @@ const Login = () => {
           <Grid item xs={7}>
             <Link
               to="/coach_registration"
-              className="text-blue-500 hover:text-blue-700 underline text-xs sm:text-sm"
+              className="text-greenDark hover:text-greenDarker underline text-xs sm:text-sm"
             >
               Don't have an account? Sign Up
             </Link>
