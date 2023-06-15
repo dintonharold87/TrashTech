@@ -7,6 +7,8 @@ import Faqs from "./components/Faqs";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
 import AdminRegistration from "./components/AdminRegistration";
+import ClientRegistration from "./components/ClientRegistration";
+
 function App() {
   return (
     <>
@@ -18,6 +20,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin_registration" element={<AdminRegistration />} />
+        <Route path="/client_registration" element={<ClientRegistration />} />
       </Routes>
     </>
   );

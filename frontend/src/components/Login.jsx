@@ -189,7 +189,7 @@ const Login = () => {
           </Grid>
           <Grid item xs={7}>
             <Link
-              to="/coach_registration"
+              to="/client_registration"
               className="text-greenDark hover:text-greenDarker underline text-xs sm:text-sm"
             >
               Don't have an account? Sign Up
