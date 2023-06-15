@@ -17,7 +17,7 @@ const HeroSection = () => {
           </p>
           <div className="flex items-center justify-center  px-4 py-2 bg-greenDark  rounded-lg w-fit md:justify-start">
             <Link
-              to="/login"
+              to="/client_registration"
               className=" text-beigeLight text-sm font-semibold font-sans md:text-base leading-normal"
             >
               Signup

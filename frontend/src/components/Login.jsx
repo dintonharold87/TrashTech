@@ -51,7 +51,7 @@ const Login = () => {
       //  const { message } = response.data;
        // Redirect based on the role
        if (values.role === "admin") {
-         navigate("/admin/dashboard");
+         navigate("/admin_dashboard");
        } else if (values.role === "client") {
          navigate("/client/profile");
        }

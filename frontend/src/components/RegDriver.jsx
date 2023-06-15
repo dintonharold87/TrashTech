@@ -10,6 +10,8 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
 const API_URL = "http://localhost:2023";
 
@@ -21,22 +23,21 @@ const theme = createTheme({
 
 const initialValues = {
   name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-  role: "client",
+  conatct: "",
+  age: "",
+  licenseNumber: "",
 };
 
 // Form validation using yup
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(8, "Password must be at least 8 characters"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirm Password is required"),
+  contact: Yup.string().required("Contact is required"),
+  age: Yup.number()
+    .min(18, "You must be above 18years old")
+    .required("Age is required"),
+  licenseNumber: Yup.string()
+    .required("National id number is required"),
+  
 });
 // // onsubmit function
 // const onSubmit = (values) => {
@@ -44,19 +45,19 @@ const validationSchema = Yup.object().shape({
 // };
 
 // Admin registration component
-const ClientRegistration = () => {
+const DriverRegistration = () => {
   const navigate = useNavigate();
   const handleSubmit = async (values, actions) => {
     try {
-      const response = await axios.post(`${API_URL}/api/clients`, values);
+      const response = await axios.post(`${API_URL}/api/drivers`, values);
       console.log(response.data);
       actions.resetForm();
-      alert("Registration successful!");
+      alert("Driver Registration successful!");
     } catch (error) {
       console.log(error);
       alert("Registration failed. Please try again.");
     }
-    navigate("/login");
+    navigate("/admin_dashboard");
   };
 
   return (
@@ -72,7 +73,7 @@ const ClientRegistration = () => {
         >
           {/* Form Title */}
           <Typography component="h2" variant="h5">
-            Client Registration Form
+            Driver Registration Form
           </Typography>
           <Formik
             initialValues={initialValues}
@@ -118,66 +119,91 @@ const ClientRegistration = () => {
                       color="success"
                       required
                       fullWidth
-                      id="email"
-                      label="Email Address"
-                      name="email"
-                      autoComplete="email"
+                      id="contact"
+                      label="Contact"
+                      name="contact"
+                      autoComplete="contact"
                       type="email"
-                      value={values.email}
+                      value={values.contact}
                       onChange={handleChange}
-                      error={touched.email && Boolean(errors.email)}
-                      helperText={touched.email && errors.email}
+                      error={touched.contact && Boolean(errors.contact)}
+                      helperText={touched.contact && errors.contact}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      color="success"
+                      required
+                      fullWidth
+                      id="age"
+                      label="Age"
+                      name="age"
+                      type="number"
+                      value={values.age}
+                      onChange={handleChange}
+                      error={touched.age && Boolean(errors.age)}
+                      helperText={touched.age && errors.age}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
                       fullWidth
                       color="success"
-                      id="password"
-                      name="password"
-                      label="Password"
-                      type="password"
-                      value={values.password}
-                      onChange={handleChange}
-                      error={touched.password && Boolean(errors.password)}
-                      helperText={touched.password && errors.password}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      color="success"
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      label="Confirm Password"
-                      type="password"
-                      value={values.confirmPassword}
+                      id="licenseNumber"
+                      name="licenseNumber"
+                      label="National Id Number"
+                      type="string"
+                      value={values.licenseNumber}
                       onChange={handleChange}
                       error={
-                        touched.confirmPassword &&
-                        Boolean(errors.confirmPassword)
+                        touched.licenseNumber && Boolean(errors.licenseNumber)
                       }
-                      helperText={
-                        touched.confirmPassword && errors.confirmPassword
-                      }
+                      helperText={touched.licenseNumber && errors.licenseNumber}
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <Button
-                      type="submit"
-                      variant="contained"
+                    <Box
                       sx={{
-                        backgroundColor: "#043F2E",
-                        color: "#ffffff",
-                        "&:hover": {
-                          backgroundColor: "#043F2E", // Custom hover color
-                          color: "#78C51C", // Custom hover text color
-                        },
+                        display: "flex",
+                        justifyContent: "space-between",
                       }}
-                      disabled={isSubmitting}
                     >
-                      Sign Up
-                    </Button>
+                      <Link
+                        to="/admin_dashboard"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Button
+                          sx={{
+                            backgroundColor: "#043F2E",
+                            color: "#ffffff",
+                            "&:hover": {
+                              backgroundColor: "#043F2E", // Custom hover color
+                              color: "#78C51C", // Custom hover text color
+                            },
+                          }}
+                          endIcon={<ArrowBackIcon />}
+                          variant="contained"
+                        >
+                          Back
+                        </Button>
+                      </Link>
+                      <Button
+                        endIcon={<SendIcon />}
+                        type="submit"
+                        variant="contained"
+                        sx={{
+                          backgroundColor: "#043F2E",
+                          color: "#ffffff",
+                          "&:hover": {
+                            backgroundColor: "#043F2E", // Custom hover color
+                            color: "#78C51C", // Custom hover text color
+                          },
+                        }}
+                        disabled={isSubmitting}
+                      >
+                        Register
+                      </Button>
+                    </Box>
                   </Grid>
                 </Grid>
               </Box>
@@ -185,19 +211,8 @@ const ClientRegistration = () => {
             )}
           </Formik>
         </Box>
-        <Grid container>
-          
-          <Grid item xs={7}>
-            <Link
-              to="/login"
-              className="text-greenDark hover:text-greenDarker underline text-xs sm:text-sm"
-            >
-              Already have an account? Login
-            </Link>
-          </Grid>
-        </Grid>
       </Container>
     </ThemeProvider>
   );
 };
-export default ClientRegistration;
+export default DriverRegistration;
