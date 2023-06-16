@@ -26,9 +26,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DriverList from "./DriverList";
 import TruckList from "./TruckList";
+import RequestList from "./RequestList";
 import axios from "axios";
 import FireTruckIcon from "@mui/icons-material/FireTruck";
-import HistoryIcon from "@mui/icons-material/History";
+
 import MessageIcon from "@mui/icons-material/Message";
 
 const API_URL = "http://localhost:2023";
@@ -111,11 +112,12 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const [showDriverList, setShowDriverList] = useState(false);
   const [showTruckList, setShowTruckList] = useState(false);
-
+const [showRequestList, setShowRequestList] = useState(false);
 
   const handleClick = (component) => {
     setShowDriverList(component === "drivers");
     setShowTruckList(component === "trucks");
+    setShowRequestList(component === "requests");
   };
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -219,12 +221,7 @@ const AdminDashboard = () => {
               </ListItemIcon>
               <ListItemText primary="Garbage Requests" />
             </ListItemButton>
-            <ListItemButton onClick={() => handleClick("responses")}>
-              <ListItemIcon>
-                <HistoryIcon />
-              </ListItemIcon>
-              <ListItemText primary="Response to Clients" />
-            </ListItemButton>
+            
           </List>
         </Drawer>
         <Box
@@ -245,6 +242,7 @@ const AdminDashboard = () => {
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                   {showDriverList && <DriverList />}
                   {showTruckList && <TruckList />}
+                  {showRequestList && <RequestList />}
                 </Paper>
               </Grid>
             </Grid>

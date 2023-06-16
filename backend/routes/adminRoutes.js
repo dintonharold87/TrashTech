@@ -68,14 +68,13 @@ router.delete(
 // View garbage requests from clients
 router.get(
   "/client-requests",
-  ensureAuthenticated,
   adminController.getClientRequests
 );
 
 // Respond to a request
 router.post(
   "/client-requests/:requestId/respond",
-  ensureAuthenticated,
+  
   adminController.respondToRequest
 );
 

@@ -13,6 +13,7 @@ import DriverRegistration from "./components/RegDriver";
 import TruckRegistration from "./components/RegTruck";
 import DriverList from "./components/DriverList";
 import TruckList from "./components/TruckList";
+import RequestList from "./components/RequestList";
 
 function App() {
   const location = useLocation();
@@ -37,6 +38,7 @@ function App() {
         <Route path="/admin_dashboard" element={<AdminDashboard />} />
         <Route path="/drivers" element={<DriverList />} />
         <Route path="/trucks" element={<TruckList />} />
+        <Route path="/requests" element={<RequestList />} />
       </Routes>
     </>
   );
