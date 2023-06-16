@@ -2,11 +2,7 @@ const mongoose = require("mongoose");
 
 // Define a schema
 const adminSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    default: mongoose.Types.ObjectId,
-  },
+  
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
