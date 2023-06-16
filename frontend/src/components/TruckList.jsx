@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useNavigate } from "react-router-dom";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 const API_URL = "http://localhost:2023";
 
 const theme = createTheme({
@@ -16,15 +16,15 @@ const theme = createTheme({
   },
 });
 
-const DriverList = () => {
-  const [drivers, setDrivers] = useState([]);
+const TruckList = () => {
+  const [trucks, setTrucks] = useState([]);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`${API_URL}/api/drivers`)
+      .get(`${API_URL}/api/garbage-trucks`)
       .then((response) => {
-        setDrivers(response.data);
+        setTrucks(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -32,25 +32,24 @@ const DriverList = () => {
   }, []);
 
   const columns = [
-    { field: "name", headerName: "Name", width: 200 },
-    { field: "contact", headerName: "Contact", width: 200 },
-    { field: "age", headerName: "Age", width: 200 },
-    { field: "licenseNumber", headerName: "National Id Number", width: 200 },
+    { field: "truckNumber", headerName: "Truck Number", width: 200 },
+    { field: "licensePlate", headerName: "Truck License Number", width: 200 },
+    
     // Add other fields here
   ];
   const handleButtonClick = () => {
-    navigate("/reg_driver");
+    navigate("/reg_truck");
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Box m="90px">
         <Typography component="h1" variant="h5">
-          List of Drivers
+          List of Trucks
         </Typography>
         <Box mt="40px" height="75vh">
           <DataGrid
-            rows={drivers}
+            rows={trucks}
             columns={columns}
             pageSize={3}
             getRowId={(row) => row._id}
@@ -61,7 +60,7 @@ const DriverList = () => {
             type="submit"
             variant="contained"
             onClick={handleButtonClick}
-            endIcon={<AddIcon/>}
+            endIcon={<AddIcon />}
             sx={{
               backgroundColor: "#043F2E",
               color: "#ffffff",
@@ -73,7 +72,7 @@ const DriverList = () => {
               mt: 2,
             }}
           >
-            {isMobile ? "Add" : "Add Driver"}
+            {isMobile ? "Add" : "Add Truck"}
           </Button>
         </Box>
       </Box>
@@ -81,4 +80,4 @@ const DriverList = () => {
   );
 };
 
-export default DriverList;
+export default TruckList;

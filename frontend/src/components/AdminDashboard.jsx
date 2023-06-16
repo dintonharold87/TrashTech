@@ -25,7 +25,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DriverList from "./DriverList";
+import TruckList from "./TruckList";
 import axios from "axios";
+import FireTruckIcon from "@mui/icons-material/FireTruck";
+import HistoryIcon from "@mui/icons-material/History";
+import MessageIcon from "@mui/icons-material/Message";
 
 const API_URL = "http://localhost:2023";
 
@@ -105,10 +109,13 @@ const Drawer = styled(MuiDrawer, {
 // Beginning of component
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const [showComponent, setShowComponent] = useState(false);
+  const [showDriverList, setShowDriverList] = useState(false);
+  const [showTruckList, setShowTruckList] = useState(false);
 
-  const handleClick = () => {
-    setShowComponent(true);
+
+  const handleClick = (component) => {
+    setShowDriverList(component === "drivers");
+    setShowTruckList(component === "trucks");
   };
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -194,11 +201,29 @@ const AdminDashboard = () => {
               </ListItemIcon>
               <ListItemText primary="Overview" />
             </ListItemButton>
-            <ListItemButton onClick={handleClick}>
+            <ListItemButton onClick={() => handleClick("drivers")}>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="Drivers" />
+            </ListItemButton>
+            <ListItemButton onClick={() => handleClick("trucks")}>
+              <ListItemIcon>
+                <FireTruckIcon />
+              </ListItemIcon>
+              <ListItemText primary="Garbage Trucks" />
+            </ListItemButton>
+            <ListItemButton onClick={() => handleClick("requests")}>
+              <ListItemIcon>
+                <MessageIcon />
+              </ListItemIcon>
+              <ListItemText primary="Garbage Requests" />
+            </ListItemButton>
+            <ListItemButton onClick={() => handleClick("responses")}>
+              <ListItemIcon>
+                <HistoryIcon />
+              </ListItemIcon>
+              <ListItemText primary="Response to Clients" />
             </ListItemButton>
           </List>
         </Drawer>
@@ -218,10 +243,12 @@ const AdminDashboard = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  {showComponent && <DriverList />}
+                  {showDriverList && <DriverList />}
+                  {showTruckList && <TruckList />}
                 </Paper>
               </Grid>
             </Grid>
+
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

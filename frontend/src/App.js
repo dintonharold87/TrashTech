@@ -11,6 +11,7 @@ import ClientRegistration from "./components/ClientRegistration";
 import AdminDashboard from "./components/AdminDashboard";
 import DriverRegistration from "./components/RegDriver";
 import DriverList from "./components/DriverList";
+import TruckList from "./components/TruckList";
 
 function App() {
   const location = useLocation();
@@ -18,7 +19,7 @@ function App() {
   const isRegisterDriver = location.pathname.startsWith("/reg_driver");
   return (
     <>
-      {(isDashboardRoute || isRegisterDriver) ? null : <Navbar />}
+      {isDashboardRoute || isRegisterDriver ? null : <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -30,6 +31,7 @@ function App() {
         <Route path="/reg_driver" element={<DriverRegistration />} />
         <Route path="/admin_dashboard" element={<AdminDashboard />} />
         <Route path="/drivers" element={<DriverList />} />
+        <Route path="/trucks" element={<TruckList />} />
       </Routes>
     </>
   );
