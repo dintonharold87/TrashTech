@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import ReplyIcon from "@mui/icons-material/Reply";
 // import Button from "@mui/material/Button";
 
@@ -21,7 +22,7 @@ const theme = createTheme({
 
 const RequestList = () => {
   const [requests, setRequests] = useState([]);
- 
+ const navigate = useNavigate();
 //   const navigate = useNavigate();
   useEffect(() => {
     axios
@@ -35,9 +36,10 @@ const RequestList = () => {
   }, []);
 
   const handleRespond = (requestId) => {
-    // Handle responding to the request with the given requestId
-    // You can navigate to the response form or perform any other action
-    console.log("Responding to request:", requestId);
+    if (requestId) {
+      navigate(`/respond/${requestId}`);
+      console.log("Responding to request:", requestId);
+    }
   };
 
   const columns = [
@@ -56,6 +58,7 @@ const RequestList = () => {
           component={Link}
           to={`/respond/${params.row._id}`} // Replace with your response form route
           onClick={() => handleRespond(params.row._id)}
+          sx={{ color: "#043F2E" }}
         >
           <ReplyIcon />
         </IconButton>
@@ -69,7 +72,7 @@ const RequestList = () => {
     <ThemeProvider theme={theme}>
       <Box m="90px">
         <Typography component="h1" variant="h5">
-          List of Drivers
+          Client requests for garbage collection
         </Typography>
         <Box mt="40px" height="75vh">
           <DataGrid

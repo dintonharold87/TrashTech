@@ -14,15 +14,20 @@ import TruckRegistration from "./components/RegTruck";
 import DriverList from "./components/DriverList";
 import TruckList from "./components/TruckList";
 import RequestList from "./components/RequestList";
+import ResponseForm from './components/ResponseForm';
 
 function App() {
   const location = useLocation();
   const isDashboardRoute = location.pathname.startsWith("/admin_dashboard");
   const isRegisterDriver = location.pathname.startsWith("/reg_driver");
   const isRegisterTruck = location.pathname.startsWith("/reg_truck");
+  const isClientResponse = location.pathname.startsWith("/respond/");
   return (
     <>
-      {isDashboardRoute || isRegisterDriver || isRegisterTruck ? null : (
+      {isDashboardRoute ||
+      isRegisterDriver ||
+      isRegisterTruck ||
+      isClientResponse ? null : (
         <Navbar />
       )}
       <Routes>
@@ -39,6 +44,7 @@ function App() {
         <Route path="/drivers" element={<DriverList />} />
         <Route path="/trucks" element={<TruckList />} />
         <Route path="/requests" element={<RequestList />} />
+        <Route path="/respond/:requestId" element={<ResponseForm />} />
       </Routes>
     </>
   );

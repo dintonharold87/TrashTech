@@ -23,7 +23,7 @@ const theme = createTheme({
 
 const initialValues = {
   name: "",
-  conatct: "",
+  contact: "",
   age: "",
   licenseNumber: "",
 };
@@ -123,7 +123,7 @@ const DriverRegistration = () => {
                       label="Contact"
                       name="contact"
                       autoComplete="contact"
-                      type="email"
+                      type="string"
                       value={values.contact}
                       onChange={handleChange}
                       error={touched.contact && Boolean(errors.contact)}
