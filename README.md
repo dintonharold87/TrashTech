@@ -61,14 +61,20 @@ Method: POST
 - Register a admin
 API endpoint:``` /api/admins```
 Method: POST
-Register a driver
+- Register a driver
 API endpoint:``` /api/drivers```
 Method: POST
-Register a garbage truck
+- Register a garbage truck
 API endpoint:``` /api/garbage-trucks```
 Method: POST
 - View all garbage trucks
 API endpoint:``` /api/garbage-trucks```
+Method: GET
+- Respond to client requests
+API endpoint:``` /api/client-requests/:requestId/respond```
+Method: POST
+- View response from admin
+API endpoint:``` /api/responses```
 Method: GET
 
 #### Security
