@@ -19,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Logout from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-
+import { Link as RouterLink } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -156,6 +156,17 @@ const UserProfileDashboard = () => {
             >
               TrashTech User Profile
             </Typography>
+            <RouterLink to="/request_form">
+              <Button
+                variant="outlined"
+                size="small"
+                color="inherit"
+                sx={{ marginRight: 2 }}
+              >
+                Make a request
+              </Button>
+            </RouterLink>
+
             <Button
               variant="outlined"
               size="small"
@@ -217,6 +228,7 @@ const UserProfileDashboard = () => {
                 </Paper>
               </Grid>
             </Grid>
+
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

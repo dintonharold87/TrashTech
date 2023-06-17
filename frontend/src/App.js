@@ -1,5 +1,4 @@
-
-import Navbar from './components/Navbar';
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import { Routes, Route, useLocation } from "react-router-dom";
 import About from "./components/About";
@@ -14,9 +13,10 @@ import TruckRegistration from "./components/RegTruck";
 import DriverList from "./components/DriverList";
 import TruckList from "./components/TruckList";
 import RequestList from "./components/RequestList";
-import ResponseList from './components/ResponseList';
-import ResponseForm from './components/ResponseForm';
-import UserProfileDashboard from './components/ClientProfile';
+import ResponseList from "./components/ResponseList";
+import ResponseForm from "./components/ResponseForm";
+import UserProfileDashboard from "./components/ClientProfile";
+import RequestForm from "./components/RequestForm";
 
 function App() {
   const location = useLocation();
@@ -24,14 +24,16 @@ function App() {
   const isRegisterDriver = location.pathname.startsWith("/reg_driver");
   const isRegisterTruck = location.pathname.startsWith("/reg_truck");
   const isClientResponse = location.pathname.startsWith("/respond/");
-   const isClientProfile = location.pathname.startsWith("/client_profile");
+  const isClientProfile = location.pathname.startsWith("/client_profile");
+  const isRequestForm = location.pathname.startsWith("/request_form");
   return (
     <>
       {isDashboardRoute ||
       isRegisterDriver ||
       isRegisterTruck ||
       isClientResponse ||
-      isClientProfile ? null : (
+      isClientProfile ||
+      isRequestForm ? null : (
         <Navbar />
       )}
       <Routes>
@@ -51,6 +53,7 @@ function App() {
         <Route path="/responses" element={<ResponseList />} />
         <Route path="/requests" element={<RequestList />} />
         <Route path="/respond/:requestId" element={<ResponseForm />} />
+        <Route path="/request_form" element={<RequestForm />} />
       </Routes>
     </>
   );
