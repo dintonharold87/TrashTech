@@ -14,7 +14,9 @@ import TruckRegistration from "./components/RegTruck";
 import DriverList from "./components/DriverList";
 import TruckList from "./components/TruckList";
 import RequestList from "./components/RequestList";
+import ResponseList from './components/ResponseList';
 import ResponseForm from './components/ResponseForm';
+import UserProfileDashboard from './components/ClientProfile';
 
 function App() {
   const location = useLocation();
@@ -22,12 +24,14 @@ function App() {
   const isRegisterDriver = location.pathname.startsWith("/reg_driver");
   const isRegisterTruck = location.pathname.startsWith("/reg_truck");
   const isClientResponse = location.pathname.startsWith("/respond/");
+   const isClientProfile = location.pathname.startsWith("/client_profile");
   return (
     <>
       {isDashboardRoute ||
       isRegisterDriver ||
       isRegisterTruck ||
-      isClientResponse ? null : (
+      isClientResponse ||
+      isClientProfile ? null : (
         <Navbar />
       )}
       <Routes>
@@ -41,8 +45,10 @@ function App() {
         <Route path="/reg_driver" element={<DriverRegistration />} />
         <Route path="/reg_truck" element={<TruckRegistration />} />
         <Route path="/admin_dashboard" element={<AdminDashboard />} />
+        <Route path="/client_profile" element={<UserProfileDashboard />} />
         <Route path="/drivers" element={<DriverList />} />
         <Route path="/trucks" element={<TruckList />} />
+        <Route path="/responses" element={<ResponseList />} />
         <Route path="/requests" element={<RequestList />} />
         <Route path="/respond/:requestId" element={<ResponseForm />} />
       </Routes>

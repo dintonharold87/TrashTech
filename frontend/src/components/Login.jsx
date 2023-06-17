@@ -53,7 +53,7 @@ const Login = () => {
        if (values.role === "admin") {
          navigate("/admin_dashboard");
        } else if (values.role === "client") {
-         navigate("/client/profile");
+         navigate("/client_profile");
        }
       console.log(response.data);
     } catch (error) {

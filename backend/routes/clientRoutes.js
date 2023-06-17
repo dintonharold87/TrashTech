@@ -7,11 +7,10 @@ const { ensureAuthenticated, ensureClient } = require("../middleware/authMiddlew
 router.post("/clients", clientController.createClient);
 
 // Submit garbage request
-router.post('/submit-garbage-request', ensureAuthenticated, ensureClient, clientController.submitGarbageRequest);
+router.post('/submit-garbage-request', clientController.submitGarbageRequest);
 
 // View response to request
-router.get("/requests/:requestId/response",
-ensureAuthenticated, ensureClient, clientController.getClientResponse);
+router.get("/requests/:requestId/response",clientController.getClientResponse);
 
 
 module.exports = router;
