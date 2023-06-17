@@ -10,7 +10,7 @@ router.post("/clients", clientController.createClient);
 router.post('/submit-garbage-request', clientController.submitGarbageRequest);
 
 // View response to request
-router.get("/requests/:requestId/response",clientController.getClientResponse);
+router.get("/responses",clientController.getClientResponse);
 
 
 module.exports = router;

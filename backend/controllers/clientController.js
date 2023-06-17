@@ -58,11 +58,10 @@ exports.submitGarbageRequest = async (req, res) => {
 // Controller to get the response from admin to a client's request
 exports.getClientResponse = async (req, res) => {
   try {
-    const { requestId } = req.params;
-    const { clientId } = req.user;
+   
     
     // Find the response for the client's request
-    const response = await ClientResponse.findOne({ requestId, clientId });
+    const response = await ClientResponse.find();
     
     if (!response) {
       return res.status(404).json({ message: 'Response not found' });
