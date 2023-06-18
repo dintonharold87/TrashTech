@@ -1,7 +1,7 @@
 # TrashTech
 ## Introduction
 ### The project
-TrashTech is a garbage management web application that aims to streamline the process of garbage collection for both clients and administrators. The project focuses on creating a user-friendly platform where clients can register, make requests for their garbage to be collected, and track the progress of their requests. Administrators, on the other hand, have the ability to manage requests, register drivers and garbage trucks, and assign them to client requests.
+[TrashTech](https://trashtech.onrender.com/) is a garbage management web application that aims to streamline the process of garbage collection for both clients and administrators. The project focuses on creating a user-friendly platform where clients can register, make requests for their garbage to be collected, and track the progress of their requests. Administrators, on the other hand, have the ability to manage requests, register drivers and garbage trucks, and assign them to client requests.
 
 TrashTech aims to simplify the garbage management process by providing a centralized platform for clients and administrators to interact and manage garbage collection requests effectively. It improves communication, ensures efficient allocation of resources, and enhances transparency throughout the process.
 ### User Stories
